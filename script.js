@@ -12,6 +12,8 @@ const updateHeader = () => {
 };
 
 const showSlide = (index) => {
+  if (!slides.length) return;
+
   currentSlide = (index + slides.length) % slides.length;
 
   slides.forEach((slide, slideIndex) => {
@@ -26,6 +28,8 @@ const showSlide = (index) => {
 };
 
 const startSlider = () => {
+  if (!slides.length) return;
+
   window.clearInterval(slideTimer);
   slideTimer = window.setInterval(() => {
     showSlide(currentSlide + 1);
@@ -55,6 +59,8 @@ dots.forEach((dot, index) => {
 
 window.addEventListener("scroll", updateHeader, { passive: true });
 
-showSlide(0);
-startSlider();
+if (slides.length) {
+  showSlide(0);
+  startSlider();
+}
 updateHeader();
